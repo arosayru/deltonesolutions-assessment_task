@@ -45,6 +45,11 @@ const ForgotPassword = () => {
                     <div style={styles.tokenBox}>
                         <p><strong>Reset Token:</strong></p>
                         <p style={styles.token}>{token}</p>
+                        <p style={styles.links}>
+                            <Link to={`/reset-password?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`}>
+                                Go to Reset Password
+                            </Link>
+                        </p>
                     </div>
                 )}
 

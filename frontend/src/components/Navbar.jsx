@@ -1,14 +1,21 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const { logout } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
     
     return (
         <div style={styles.navbar}>
             <h3>Task Manager</h3>
 
-            <button style={styles.button} onClick={logout}>
+            <button style={styles.button} onClick={handleLogout}>
                 Logout
             </button>
         </div>

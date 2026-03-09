@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { resetPassword } from "../services/authService";
 
 const ResetPassword = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
     const [form, setForm] = useState({
-        email: "",
-        token: "",
+        email: searchParams.get("email") || "",
+        token: searchParams.get("token") || "",
         newPassword: ""
     });
 

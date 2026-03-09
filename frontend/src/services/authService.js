@@ -9,7 +9,9 @@ export const loginUser = (data) => {
 };
 
 export const forgotPassword = (email) => {
-    return API.post("/auth/forgot-password", { email });
+    return API.post("/auth/forgot-password", null, {
+        params: { email }
+    });
 };
 
 export const resetPassword = (data) => {
