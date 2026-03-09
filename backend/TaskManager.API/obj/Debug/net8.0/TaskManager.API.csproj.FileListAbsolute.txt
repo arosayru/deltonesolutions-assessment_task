@@ -104,3 +104,12 @@ E:\CV\Deltone Solutions\backend\TaskManager.API\obj\Debug\net8.0\refint\TaskMana
 E:\CV\Deltone Solutions\backend\TaskManager.API\obj\Debug\net8.0\TaskManager.API.pdb
 E:\CV\Deltone Solutions\backend\TaskManager.API\obj\Debug\net8.0\TaskManager.API.genruntimeconfig.cache
 E:\CV\Deltone Solutions\backend\TaskManager.API\obj\Debug\net8.0\ref\TaskManager.API.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\BCrypt.Net-Next.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+E:\CV\Deltone Solutions\backend\TaskManager.API\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
