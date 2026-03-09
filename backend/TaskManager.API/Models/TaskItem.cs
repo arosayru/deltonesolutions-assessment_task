@@ -7,5 +7,7 @@ namespace TaskManager.API.Models
         public string? Description  { get; set; }
         public bool IsCompleted { get; set; } = false;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

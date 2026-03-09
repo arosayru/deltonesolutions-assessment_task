@@ -13,9 +13,9 @@ namespace TaskManager.API.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<TaskItem>> GetAllTasks()
+        public async Task<IEnumerable<TaskItem>> GetAllTasks(int userId)
         {
-            return await _context.Tasks.ToListAsync();
+            return await _context.Tasks.Where(t => t.UserId == userId).ToListAsync();
         }
 
         public async Task<TaskItem?> GetTaskById(int id)

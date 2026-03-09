@@ -4,7 +4,7 @@ namespace TaskManager.API.Repositories.Interfaces
 {
     public interface ITaskRepository
     {
-        Task<IEnumerable<TaskItem>> GetAllTasks();
+        Task<IEnumerable<TaskItem>> GetAllTasks(int userId);
         Task<TaskItem?> GetTaskById(int id);
         Task<TaskItem> CreateTask(TaskItem task);
         Task UpdateTask(TaskItem task);

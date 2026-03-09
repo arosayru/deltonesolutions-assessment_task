@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TaskManager.API.DTOs;
 using TaskManager.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace TaskManager.API.Controllers
 {
@@ -11,15 +12,23 @@ namespace TaskManager.API.Controllers
     public class TasksController : ControllerBase
     {
         private readonly ITaskService _service;
+
         public TasksController(ITaskService service)
         {
             _service = service;
+        }
+        private int GetUserId()
+        {
+            return int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetTasks()
         {
-            var tasks = await _service.GetTasks();
+            var userId = GetUserId();
+
+            var tasks = await _service.GetTasks(userId);
+
             return Ok(tasks);
         }
 
@@ -40,7 +49,9 @@ namespace TaskManager.API.Controllers
             if (string.IsNullOrWhiteSpace(dto.Title))
                 return BadRequest("Title cannot be empty");
 
-            var task = await _service.CreateTask(dto);
+            var userId = GetUserId();
+
+            var task = await _service.CreateTask(dto, userId);
 
             return Ok(task);
         }

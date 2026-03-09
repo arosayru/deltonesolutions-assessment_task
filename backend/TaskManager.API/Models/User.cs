@@ -9,5 +9,6 @@ namespace TaskManager.API.Models
         public string? ResetToken { get; set; }
         public DateTime? ResetTokenExpiry { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public List<TaskItem> Tasks { get; set; } = new();
     }
 }
