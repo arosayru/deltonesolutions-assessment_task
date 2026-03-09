@@ -27,30 +27,46 @@ const styles = {
     card: {
         display: "flex",
         justifyContent: "space-between",
+        alignItems: "center",
+        gap: "10px",
         padding: "12px",
-        border: "1px solid #ddd",
+        border: "1px solid #e2e8f0",
         marginBottom: "10px",
-        borderRadius: "5px"
+        borderRadius: "12px",
+        background: "white",
+        boxShadow: "0 6px 14px rgba(15, 23, 42, 0.06)"
+    },
+
+    taskText: {
+        color: "#0f172a",
+        fontSize: "15px",
+        lineHeight: "1.4",
+        wordBreak: "break-word"
     },
 
     actions: {
         display: "flex",
-        gap: "10px"
+        gap: "8px",
+        flexShrink: 0
     },
 
     toggle: {
-        background: "#2196f3",
+        background: "linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)",
         color: "white",
         border: "none",
-        padding: "6px 10px",
-        cursor: "pointer"
+        padding: "7px 12px",
+        borderRadius: "8px",
+        cursor: "pointer",
+        fontWeight: "600"
     },
 
     delete: {
-        background: "#f44336",
+        background: "linear-gradient(135deg, #ef4444 0%, #f97316 100%)",
         color: "white",
         border: "none",
-        padding: "6px 10px",
-        cursor: "pointer"
+        padding: "7px 12px",
+        borderRadius: "8px",
+        cursor: "pointer",
+        fontWeight: "600"
     }
 };
