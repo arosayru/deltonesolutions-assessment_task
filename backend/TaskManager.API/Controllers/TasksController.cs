@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TaskManager.API.Data;
 using TaskManager.API.DTOs;
-using TaskManager.API.Models;
+using TaskManager.API.Services.Interfaces;
 
 namespace TaskManager.API.Controllers
 {
@@ -10,70 +8,48 @@ namespace TaskManager.API.Controllers
     [Route("api/[controller]")]
     public class TasksController : ControllerBase
     {
-        private readonly AppDbContext _context;
-        public TasksController(AppDbContext context)
+        private readonly ITaskService _service;
+        public TasksController(ITaskService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskItem>>> GetTasks()
+        public async Task<IActionResult> GetTasks()
         {
-            var tasks = await _context.Tasks.ToListAsync();
+            var tasks = await _service.GetTasks();
             return Ok(tasks);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TaskItem>> GetTask(int id)
+        public async Task<IActionResult> GetTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await _service.GetTask(id);
+
             if (task == null)
-            {
                 return NotFound();
-            }
+
             return Ok(task);
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> CreateTask(TaskDto taskDto)
+        public async Task<IActionResult> CreateTask(TaskDto dto)
         {
-            if (string.IsNullOrWhiteSpace(taskDto.Title))
-            {
-                return BadRequest("Task title cannot be empty.");
-            }
+            if (string.IsNullOrWhiteSpace(dto.Title))
+                return BadRequest("Title cannot be empty");
 
-            var task = new TaskItem
-            {
-                Title = taskDto.Title,
-                Description = taskDto.Description,
-                IsCompleted = taskDto.IsCompleted
-            };
+            var task = await _service.CreateTask(dto);
 
-            _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetTask), new { id = task.Id }, task);
+            return Ok(task);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTask(int id, TaskDto taskDto)
+        public async Task<IActionResult> UpdateTask(int id, TaskDto dto)
         {
-            var task = await _context.Tasks.FindAsync(id);
-            if (task == null)
-            {
+            var updated = await _service.UpdateTask(id, dto);
+
+            if (!updated)
                 return NotFound();
-            }
-
-            if (string.IsNullOrWhiteSpace(taskDto.Title))
-            {
-                return BadRequest("Task title cannot be empty.");
-            }
-
-            task.Title = taskDto.Title;
-            task.Description = taskDto.Description;
-            task.IsCompleted = taskDto.IsCompleted;
-
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -81,15 +57,10 @@ namespace TaskManager.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
-            if (task == null)
-            {
-                return NotFound();
-            }
+            var deleted = await _service.DeleteTask(id);
 
-            _context.Tasks.Remove(task);
-            
-            await _context.SaveChangesAsync();
+            if (!deleted)
+                return NotFound();
 
             return NoContent();
         }
@@ -97,15 +68,10 @@ namespace TaskManager.API.Controllers
         [HttpPatch("{id}/toggle")]
         public async Task<IActionResult> ToggleTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task = await _service.ToggleTask(id);
+
             if (task == null)
-            {
                 return NotFound();
-            }
-
-            task.IsCompleted = !task.IsCompleted;
-
-            await _context.SaveChangesAsync();
 
             return Ok(task);
         }

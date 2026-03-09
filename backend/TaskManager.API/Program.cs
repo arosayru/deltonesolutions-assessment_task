@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TaskManager.API.Data;
+using TaskManager.API.Repositories;
+using TaskManager.API.Repositories.Interfaces;
+using TaskManager.API.Services;
+using TaskManager.API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,8 @@ builder.Services.AddControllers();
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 // Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
